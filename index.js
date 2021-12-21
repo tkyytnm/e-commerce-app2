@@ -1,11 +1,10 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const loaders = require("./loader");
+const { PORT } = require("./config");
 
-app.get("/", (req, res, next) => {
-  res.send("Hello World!");
-});
+loaders(app);
 
-app.listen(port, () => {
-  console.log(`This app listening at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`This app listening at http://localhost:${PORT}`);
 });
