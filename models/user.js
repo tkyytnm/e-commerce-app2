@@ -57,7 +57,7 @@ module.exports = class UserModel {
     try {
       const values = [email];
       const result = await db.query(
-        "select * from users where id = $1",
+        "select * from users where email = $1",
         values
       );
       if (result.rows?.length) {
