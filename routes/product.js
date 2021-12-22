@@ -9,7 +9,7 @@ module.exports = (app) => {
   router.get("/", async (req, res, next) => {
     try {
       const categoryId = req.query.categoryId;
-      const response = await ProductServiceInstance.list(app, categoryId);
+      const response = await ProductServiceInstance.list(categoryId);
       res.status(200).send(response);
     } catch (error) {
       next(error);
@@ -19,7 +19,7 @@ module.exports = (app) => {
   router.get("/:productId", async (req, res, next) => {
     try {
       const { productId } = req.params;
-      const response = await ProductServiceInstance.get(app, productId);
+      const response = await ProductServiceInstance.get(productId);
       res.status(200).send(response);
     } catch (error) {
       next(error);

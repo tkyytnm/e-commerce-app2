@@ -4,19 +4,27 @@ module.exports = class ProductModel {
   async find(categoryId) {
     try {
       if (categoryId) {
-        const text = `
+        const statement = `
           select products.id, products.name, products.price
           from products, categories, categories_products
           where products.id = categories_products.product_id
           and categories.id = categories_products.category_id
           and categories.id = $1
         `;
-        const value = categoryId;
-        const result = await db.any(text, value);
-        return result;
+        const values = [categoryId];
+        const result = await db.query(statement, values);
+
+        if (result.rows?.length) {
+          return result.rows;
+        }
+        return [];
       } else {
-        const result = await db.any("select * from products");
-        return result;
+        const result = await db.query("select * from products");
+
+        if (result.rows?.length) {
+          return result.rows;
+        }
+        return [];
       }
     } catch (error) {
       throw error;
@@ -26,12 +34,14 @@ module.exports = class ProductModel {
   async findOne(productId) {
     try {
       const values = [productId];
-      console.log(values);
-      const result = await db.any(
+      const result = await db.query(
         "select * from products where id = $1",
         values
       );
-      return result;
+      if (result.rows?.length) {
+        return result.rows[0];
+      }
+      return null;
     } catch (error) {
       throw error;
     }
