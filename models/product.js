@@ -27,7 +27,7 @@ module.exports = class ProductModel {
         return [];
       }
     } catch (error) {
-      throw error;
+      throw new Error(error);
     }
   }
 
@@ -43,7 +43,7 @@ module.exports = class ProductModel {
       }
       return null;
     } catch (error) {
-      throw error;
+      throw new Error(error);
     }
   }
 };

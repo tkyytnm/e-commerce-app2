@@ -26,4 +26,14 @@ module.exports = (app) => {
       next(error);
     }
   });
+
+  router.post("/register", async (req, res, next) => {
+    try {
+      const data = req.body;
+      const response = await UserServiceInstance.create(data);
+      res.status(200).send(response);
+    } catch (error) {
+      next(error);
+    }
+  });
 };

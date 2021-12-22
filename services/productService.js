@@ -3,12 +3,20 @@ const ProductModelInstance = new ProductModel();
 
 module.exports = class ProductService {
   async list(categoryId) {
-    const products = await ProductModelInstance.find(categoryId);
-    return products;
+    try {
+      const products = await ProductModelInstance.find(categoryId);
+      return products;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   async get(productId) {
-    const product = await ProductModelInstance.findOne(productId);
-    return product;
+    try {
+      const product = await ProductModelInstance.findOne(productId);
+      return product;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 };
