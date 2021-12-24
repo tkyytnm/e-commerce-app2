@@ -6,11 +6,11 @@ const pool = new Pool({
   host: DB.HOST,
   database: DB.DATABASE,
   password: DB.PASSWORD,
-  port: DB.PORT
+  port: DB.PORT,
 });
 
 module.exports = {
-  query: (text, params, callback) => {
-    return pool.query(text, params, callback);
+  query: (text, params) => {
+    return pool.query(text, params);
   },
 };

@@ -6,7 +6,7 @@ module.exports = class UserModel {
     try {
       const statement = pgp.helpers.insert(data, null, "users");
 
-      const result = db.query(statement);
+      const result = await db.query(statement);
 
       if (result.rows?.length) {
         return result.rows[0];
@@ -60,10 +60,10 @@ module.exports = class UserModel {
         "select * from users where email = $1",
         values
       );
-      if (result.rows?.length) {
-        return result.rows;
-      }
 
+      if (result.rows?.length) {
+        return result.rows[0];
+      }
       return null;
     } catch (error) {
       throw new Error(error);
