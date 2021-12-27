@@ -6,7 +6,6 @@ module.exports = class CartModel {
     try {
       const data = { user_id: userId };
       const statement = pgp.helpers.insert(data, null, "cart");
-      console.log(statement);
       const result = await db.query(statement);
 
       if (result.rows?.length) {
@@ -19,16 +18,28 @@ module.exports = class CartModel {
     }
   }
 
-  async delete(cartId) {
+  static async findById(id) {
     try {
-      const statement = ``;
-      const values = [cartId];
+      const statement = `select * from cart where id = $1`;
+      const values = [id];
       const result = await db.query(statement, values);
-
       if (result.rows?.length) {
         return result.rows[0];
       }
+      return null;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 
+  static async findByUser(userId) {
+    try {
+      const statement = `select * from cart where user_id = $1`;
+      const values = [userId];
+      const result = await db.query(statement, values);
+      if (result.rows?.length) {
+        return result.rows[0];
+      }
       return null;
     } catch (error) {
       throw new Error(error);

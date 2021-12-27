@@ -6,6 +6,16 @@ const CartServiceInstance = new CartService();
 module.exports = (app) => {
   app.use("/cart", router);
 
+  router.get("/", async (req, res, next) => {
+    try {
+      const { id } = req.user;
+      const response = await CartServiceInstance.loadCart(id);
+      res.status(200).send(response);
+    } catch (error) {
+      return next(error);
+    }
+  });
+
   router.post("/", async (req, res, next) => {
     try {
       const { id } = req.user;
@@ -16,23 +26,33 @@ module.exports = (app) => {
     }
   });
 
-  router.post("/:cartId", async (req, res, next) => {
+  router.post("/items", async (req, res, next) => {
     try {
       const { id } = req.user;
-      const { product_id, qty } = req.body;
-      const response = await CartServiceInstance.list(cartId);
+      const data = req.body;
+      const response = await CartServiceInstance.addItem(id, data);
+      res.status(201).send(response);
+    } catch (error) {
+      return next(error);
+    }
+  });
+
+  router.put("/items/:cartItemId", async (req, res, next) => {
+    try {
+      const { cartItemId } = req.params;
+      const data = req.body;
+      const response = await CartServiceInstance.updateItem(cartItemId, data);
       res.status(200).send(response);
     } catch (error) {
       return next(error);
     }
   });
 
-  router.get("/:cartId", async (req, res, next) => {
+  router.delete("/items/:cartItemId", async (req, res, next) => {
+    const { cartItemId } = req.params;
+    const response = await CartServiceInstance.removeItem(cartItemId);
+    res.status(200).send(response);
     try {
-      const { id } = req.user;
-      const { cartId } = req.query;
-      const response = await CartServiceInstance.list(cartId);
-      res.status(200).send(response);
     } catch (error) {
       return next(error);
     }

@@ -7,7 +7,7 @@ module.exports = class ProductService {
       const products = await ProductModelInstance.find(categoryId);
       return products;
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -16,7 +16,7 @@ module.exports = class ProductService {
       const product = await ProductModelInstance.findOne(productId);
       return product;
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
 };

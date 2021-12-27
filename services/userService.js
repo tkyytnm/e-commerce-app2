@@ -7,7 +7,7 @@ module.exports = class UserService {
       const user = await UserModelInstance.findOneById(userId);
       return user;
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -16,7 +16,7 @@ module.exports = class UserService {
       const user = await UserModelInstance.update(data);
       return user;
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -25,7 +25,7 @@ module.exports = class UserService {
       const user = await UserModelInstance.create(data);
       return user;
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
 };
