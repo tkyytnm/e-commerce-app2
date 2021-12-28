@@ -57,4 +57,15 @@ module.exports = (app) => {
       return next(error);
     }
   });
+
+  router.post("/:cartId/checkout", async (req, res, next) => {
+    try {
+      const { id } = req.user;
+      const { cartId } = req.params;
+      const response = await CartServiceInstance.checkout(cartId, id);
+      res.status(200).send(response);
+    } catch (error) {
+      return next(error);
+    }
+  });
 };

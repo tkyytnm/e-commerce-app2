@@ -1,11 +1,20 @@
 const db = require("../db");
 const pgp = require("pg-promise")({ capSQL: true });
+const dayjs = require("dayjs");
+const format = 'YYYY-MM-DD';
 
 module.exports = class CartModel {
+  constructor(data = {}) {
+    this.created = data.created || dayjs().format(format);
+    this.modified = dayjs().format(format);
+    this.converted = data.converted || null;
+    this.isActive = data.isActive || true;
+  }
+
   async create(userId) {
     try {
       const data = { user_id: userId };
-      const statement = pgp.helpers.insert(data, null, "cart");
+      const statement = pgp.helpers.insert(data, null, "cart") + ' returning *';
       const result = await db.query(statement);
 
       if (result.rows?.length) {

@@ -1,5 +1,5 @@
-const createError = require("http-errors");
 const CartModel = require("../models/cart");
+const OrderModel = require("../models/order");
 const CartItemModel = require("../models/cartItem");
 
 module.exports = class CartService {
@@ -51,6 +51,26 @@ module.exports = class CartService {
     try {
       const cartItem = await CartItemModel.delete(cartItemId);
       return cartItem;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async checkout(cartId, userId) {
+    try {
+      const cartItems = await CartItemModel.find(cartId);
+      const total = cartItems.reduce(
+        (total, item) => total + Number(item.price) * Number(item.qty),
+        0
+      );
+
+      const Order = new OrderModel({ total, userId });
+      Order.addItems(cartItems);
+      await Order.create();
+
+      const order = await Order.update({ status: "COMPLETE" });
+
+      return order;
     } catch (error) {
       throw error;
     }
