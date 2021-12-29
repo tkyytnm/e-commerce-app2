@@ -16,7 +16,8 @@ module.exports = class OrderService {
 
   async list(userId) {
     try {
-      
+      const orders = await OrderModel.findByUser(userId);
+      return orders;
     } catch (error) {
       throw error;
     }
@@ -24,6 +25,8 @@ module.exports = class OrderService {
 
   async findById(orderId) {
     try {
+      const order = await OrderModel.findById(orderId);
+      return order;
     } catch (error) {
       throw error;
     }

@@ -4,12 +4,13 @@ const OrderService = require("../services/orderService");
 const OrderServiceInstance = new OrderService();
 
 module.exports = (app) => {
-  app.use("/order", router);
+  app.use("/orders", router);
 
   router.get("/", async (req, res, next) => {
     try {
-      const id = req
-      const response = await OrderServiceInstance.loadItems(id);
+      const { id } = req.user;
+      const response = await OrderServiceInstance.list(id);
+      res.status(200).send(response);
     } catch (error) {
       return next(error);
     }
@@ -17,6 +18,9 @@ module.exports = (app) => {
 
   router.get("/:orderId", async (req, res, next) => {
     try {
+      const orderId = req.params.orderId;
+      const response = await OrderServiceInstance.findById(orderId);
+      res.status(200).send(response);
     } catch (error) {
       return next(error);
     }

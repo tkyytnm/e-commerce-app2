@@ -61,7 +61,7 @@ module.exports = class OrderModel {
     }
   }
 
-  async findByUser(userId) {
+  static async findByUser(userId) {
     try {
       const statement = "select * from orders where user_id = $1";
       const values = [userId];
@@ -75,15 +75,15 @@ module.exports = class OrderModel {
     }
   }
 
-  async findById(orderId) {
+  static async findById(orderId) {
     try {
       const statement = "select * from orders where id = $1";
       const values = [orderId];
       const result = await db.query(statement, values);
       if (result.rows?.length) {
-        return result.rows;
+        return result.rows[0];
       }
-      return [];
+      return null;
     } catch (error) {
       throw new Error(error);
     }
