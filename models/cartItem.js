@@ -22,14 +22,13 @@ module.exports = class CartItemModel {
       const condition = pgp.as.format(` where id = $1 returning *`, [id]);
       const statement =
         pgp.helpers.update(data, null, "cart_items") + condition;
-      console.log(statement);
       const result = await db.query(statement);
 
       if (result.rows?.length) {
         return result.rows;
       }
 
-      return null;
+      return [];
     } catch (error) {
       throw new Error(error);
     }
@@ -48,7 +47,7 @@ module.exports = class CartItemModel {
         return result.rows;
       }
 
-      return null;
+      return [];
     } catch (error) {
       throw new Error(error);
     }

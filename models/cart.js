@@ -7,13 +7,13 @@ module.exports = class CartModel {
   constructor(data = {}) {
     this.created = data.created || dayjs().format(format);
     this.modified = dayjs().format(format);
-    this.converted = data.converted || null;
-    this.isActive = data.isActive || true;
+    // this.converted = data.converted || null;
+    // this.isActive = data.isActive || true;
   }
 
   async create(userId) {
     try {
-      const data = { user_id: userId };
+      const data = { user_id: userId, ...this };
       const statement = pgp.helpers.insert(data, null, "cart") + ' returning *';
       const result = await db.query(statement);
 

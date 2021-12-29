@@ -1,6 +1,7 @@
 const CartModel = require("../models/cart");
 const OrderModel = require("../models/order");
 const CartItemModel = require("../models/cartItem");
+const OrderItemModel = require("../models/orderItem");
 
 module.exports = class CartService {
   async create(data) {
@@ -69,7 +70,6 @@ module.exports = class CartService {
       await Order.create();
 
       const order = await Order.update({ status: "COMPLETE" });
-
       return order;
     } catch (error) {
       throw error;

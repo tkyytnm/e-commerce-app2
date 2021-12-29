@@ -1,6 +1,6 @@
 const db = require("../db");
 const pgp = require("pg-promise")({ capSQL: true });
-const OrderItem = require("./orderItem");
+const OrderItemModel = require("./orderItem");
 const dayjs = require("dayjs");
 const format = "YYYY-MM-DD";
 
@@ -15,7 +15,7 @@ module.exports = class OrderModel {
   }
 
   addItems(items) {
-    this.items = items.map((items) => new OrderItem(items));
+    this.items = items.map((item) => new OrderItemModel(item));
   }
 
   async create() {
@@ -28,6 +28,13 @@ module.exports = class OrderModel {
       if (result.rows?.length) {
         Object.assign(this, result.rows[0]);
 
+        for (let i = 0; i < this.items.length; i++) {
+          const order_id = result.rows[0].id;
+          const item = this.items[i];
+          const OrderItem = new OrderItemModel();
+          await OrderItem.create({ order_id, ...item });
+        }
+
         return result.rows[0];
       }
 
@@ -39,7 +46,9 @@ module.exports = class OrderModel {
 
   async update(data) {
     try {
-      const condition = pgp.as.format("where id = ${id} returning *", { id: this.id });
+      const condition = pgp.as.format("where id = ${id} returning *", {
+        id: this.id,
+      });
       const statement = pgp.helpers.update(data, null, "orders") + condition;
       const result = await db.query(statement);
 
@@ -52,7 +61,31 @@ module.exports = class OrderModel {
     }
   }
 
-  async findByUser() {}
+  async findByUser(userId) {
+    try {
+      const statement = "select * from orders where user_id = $1";
+      const values = [userId];
+      const result = await db.query(statement, values);
+      if (result.rows?.length) {
+        return result.rows;
+      }
+      return [];
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 
-  async findById() {}
+  async findById(orderId) {
+    try {
+      const statement = "select * from orders where id = $1";
+      const values = [orderId];
+      const result = await db.query(statement, values);
+      if (result.rows?.length) {
+        return result.rows;
+      }
+      return [];
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 };
