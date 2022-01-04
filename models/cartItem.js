@@ -8,7 +8,7 @@ module.exports = class CartItemModel {
       const result = await db.query(statement);
 
       if (result.rows?.length) {
-        return result.rows;
+        return result.rows[0];
       }
 
       return null;

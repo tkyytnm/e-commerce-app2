@@ -1,0 +1,417 @@
+openapi: 3.0.0
+info:
+  title: E Commerce App 2
+  description: Codecademy Backend Portfolio project.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local server for studying...
+paths:
+  /products:
+    get:
+      summary: Returns a list of products.
+      description: Returns a list of products.
+      responses:
+        "200": # status code
+          description: A JSON array of product names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 123
+                    name:
+                      type: string
+                      example: Black Cap
+                    price:
+                      type: integer
+                      example: 5000
+                    description:
+                      type: string
+                      example: Nice Black Cap
+  /products/{productId}:
+    get:
+      summary: Returns a product by ID.
+      description: Returns a product data by ID.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          scheme:
+            type: integer
+            minimum: 1
+      responses:
+        "200": # status code
+          description: A JSON array of product names
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 123
+                  name:
+                    type: string
+                    example: Black Cap
+                  price:
+                    type: integer
+                    example: 5000
+                  description:
+                    type: string
+                    example: Nice Black Cap
+  /users/{userId}:
+    get:
+      summary: Return a user data by userId.
+      description: Return a user data by userId.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: userId for specify an existing user.
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200": # status code
+          description: A JSON object of user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    put:
+      summary: Update a user data by userId.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: A JSON object of a user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /auth/register:
+    post:
+      summary: register a user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Jon Doe
+                email:
+                  type: string
+                  example: jondoe@example.com
+                password:
+                  type: string
+                  example: password
+      responses:
+        "200": # status code
+          description: A JSON object of a user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /auth/login:
+    post:
+      summary: authenticate a user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: jondoe@example.com
+                password:
+                  type: string
+                  example: password
+      responses:
+        "200": # status code
+          description: A JSON object of a user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /cart:
+    get:
+      summary: Returns a list of cartItems.
+      responses:
+        "200": # status code
+          description: A JSON object of cart items
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 123
+                  user_id:
+                    type: integer
+                    example: 123
+                  created:
+                    type: string
+                    format: date-time
+                    example: 2021-12-27T15:00:00.000Z
+                  modified:
+                    type: string
+                    format: date-time
+                    example: 2021-12-27T15:00:00.000Z
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        qty:
+                          type: integer
+                          example: 10
+                        cartitemid:
+                          type: integer
+                          example: 6
+                        id:
+                          type: integer
+                          example: 8
+                        name:
+                          type: string
+                          example: "Black shoes"
+                        price:
+                          type: integer
+                          example: 9000
+                        description:
+                          type: string
+                          example: Cool black shoes
+    post:
+      summary: create cart.
+      requestBody:
+        required: false
+      responses:
+        '200':
+          description: A cart object.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  user_id:
+                    type: integer
+                  created:
+                    type: string
+                  modified:
+                    type: string
+  /cart/items:
+    post:
+      summary: add cart items.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cart_id:
+                  type: integer
+                product_id:
+                  type: integer
+                qty:
+                  type: integer
+      responses:
+        "200":
+          description: A cart item object.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cart_id:
+                    type: integer
+                  product_id:
+                    type: integer
+                  qty:
+                    type: integer
+                  id:
+                    type: integer
+
+  /cart/items/{cartItemId}:
+    put:
+      summary: update cart item by id.
+      parameters:
+        - name: cartItemId
+          in: path
+          required: true
+          scheme:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                qty:
+                  type: integer
+      responses:
+        "200":
+          description: A cart item object.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cart_id:
+                    type: integer
+                  product_id:
+                    type: integer
+                  qty:
+                    type: integer
+                  id:
+                    type: integer
+    delete:
+      summary: delete cart item by id.
+      parameters:
+        - name: cartItemId
+          in: path
+          required: true
+          scheme:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: A cart item object.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cart_id:
+                    type: integer
+                  product_id:
+                    type: integer
+                  qty:
+                    type: integer
+                  id:
+                    type: integer
+  /cart/{cartId}/checkout:
+    post:
+      summary: checkout cart.
+      parameters:
+        - name: cartId
+          in: path
+          required: true
+          scheme:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: An order object.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  user_id:
+                    type: integer
+                  created:
+                    type: string
+                  modified:
+                    type: string
+                  total:
+                    type: integer
+                  status:
+                    type: string
+  /orders:
+    get:
+      summary: get orders.
+      responses:
+        "200": # status code
+          description: A JSON array of orders.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    user_id:
+                      type: integer
+                    created:
+                      type: string
+                    modified:
+                      type: string
+                    total:
+                      type: integer
+                    status:
+                      type: string
+  /orders/{orderId}:
+    get:
+      summary: get an order.
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          scheme:
+            type: integer
+            minimum: 1
+      responses:
+        "200": # status code
+          description: A JSON object of an order.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  user_id:
+                    type: integer
+                  created:
+                    type: string
+                  modified:
+                    type: string
+                  total:
+                    type: integer
+                  status:
+                    type: string
+                
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 123
+        name:
+          type: string
+          example: Jon Doe
+        email:
+          type: string
+          format: email
+          example: jondoe@example.com
+        password:
+          type: string
+          format: password
+          example: password

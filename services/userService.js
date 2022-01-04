@@ -20,12 +20,12 @@ module.exports = class UserService {
     }
   }
 
-  async create(data) {
-    try {
-      const user = await UserModelInstance.create(data);
-      return user;
-    } catch (error) {
-      throw error;
-    }
-  }
+  // async create(data) {
+  //   try {
+  //     const user = await UserModelInstance.create(data);
+  //     return user;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 };
