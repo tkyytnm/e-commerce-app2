@@ -1,13 +1,11 @@
 const { Pool } = require("pg");
 const { DB } = require("../config");
 
-const pool = new Pool({
-  user: DB.USERNAME,
-  host: DB.HOST,
-  database: DB.DATABASE,
-  password: DB.PASSWORD,
-  port: DB.PORT,
-});
+const devConfig = `postgresql://${DB.USERNAME}:${DB.PASSWORD}@${DB.HOST}:${DB.PORT}/${DB.DATABASE}`;
+
+const proConfig = process.env.DATABASE_URL;
+
+const pool = new Pool(proConfig || devConfig);
 
 module.exports = {
   query: (text, params) => {
