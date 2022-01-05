@@ -6,8 +6,8 @@ const swaggerLoader = require("./swagger");
 module.exports = (app) => {
   const expressApp = expressLoader(app);
   const passport = passportLoader(expressApp);
-  routesLoader(app, passport);
-  swaggerLoader(app);
+  routesLoader(expressApp, passport);
+  swaggerLoader(expressApp);
 
   // error handler
   app.use((err, req, res, next) => {
