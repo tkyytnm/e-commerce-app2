@@ -6,6 +6,8 @@ info:
 servers:
   - url: http://localhost:3000
     description: Local server for studying...
+  - url: https://e-commerce-app2-on-codecademy.herokuapp.com/
+    description: heroku server
 paths:
   /products:
     get:
