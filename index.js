@@ -1,10 +1,14 @@
 const express = require("express");
 const app = express();
 const loaders = require("./loader");
-const { PORT } = require("./config");
+const { PORT } = require("./config") || 3000;
 
-loaders(app);
+async function startServer() {
+  loaders(app);
 
-app.listen(PORT, () => {
-  console.log(`This app listening at http://localhost:${PORT}`);
-});
+  app.listen(PORT, () => {
+    console.log(`Server listening on PORT ${PORT}`);
+  });
+}
+
+startServer();
