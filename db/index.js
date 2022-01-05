@@ -5,6 +5,7 @@ require("dotenv").config();
 const devConfig = `postgresql://${DB.USERNAME}:${DB.PASSWORD}@${DB.HOST}:${DB.PORT}/${DB.DATABASE}`;
 
 const proConfig = process.env.DATABASE_URL;
+console.log(proConfig);
 
 const pool = new Pool({
   connectionString:
