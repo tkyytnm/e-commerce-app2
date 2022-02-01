@@ -1,14 +1,14 @@
-import "./Nav.css";
+import { Link } from "react-router-dom";
 
 function Nav() {
   return (
     <nav>
-      <a href="">Products</a>
-      <a href="">Cart</a>
-      <a href="">Order History</a>
-      <a href="">Logout</a>
-      <a href="">Sign up</a>
-      <a href="">Sign in</a>
+      <Link to="/products">Products</Link>
+      <Link to="/cart">Cart</Link>
+      <Link to="/order">Order History</Link>
+      <Link to="/logout">Logout</Link>
+      <Link to="/register">Sign up</Link>
+      <Link to="/login">Sign in</Link>
     </nav>
   );
 }
