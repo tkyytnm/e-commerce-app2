@@ -1,0 +1,14 @@
+body {
+  color: #333;
+}
+
+a {
+  color: #666;
+  text-decoration: none;
+  border-bottom: 1px solid #666;
+}
+
+a:hover {
+  opacity: 0.8;
+  border-bottom: none;
+}
