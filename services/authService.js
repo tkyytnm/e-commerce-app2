@@ -12,12 +12,9 @@ module.exports = class AuthService {
       if (user) {
         throw createError(409, "Email is already in use.");
       }
-
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(password, salt, async (err, hash) => {
-          return await UserModelInstance.create({ ...data, password: hash });
-        });
-      });
+      const salt = await bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(password, salt);
+      return await UserModelInstance.create({ ...data, password: hash });
     } catch (error) {
       throw createError(500, error);
     }
@@ -27,11 +24,13 @@ module.exports = class AuthService {
     try {
       const { email, password } = data;
       const user = await UserModelInstance.findOneByEmail(email);
-
       if (!user) {
         throw createError(401, "Invalid username");
       }
-      if (user.password !== password) {
+
+      const res = await bcrypt.compare(password, user.password);
+
+      if (!res) {
         throw createError(401, "Invalid password");
       }
 

@@ -17,13 +17,16 @@ module.exports = (app) => {
 
   passport.use(
     new LocalStrategy(async (username, password, done) => {
-      
-      const user = await AuthServiceInstance.login({
-        email: username,
-        password,
-      });
+      try {
+        const user = await AuthServiceInstance.login({
+          email: username,
+          password,
+        });
 
-      return done(null, user);
+        return done(null, user);
+      } catch (error) {
+        return done(error);
+      }
     })
   );
 

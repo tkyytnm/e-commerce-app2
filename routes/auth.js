@@ -16,20 +16,11 @@ module.exports = (app, passport) => {
     }
   });
 
-  router.post(
-    "/login",
-    passport.authenticate("local"),
-    async (req, res, next) => {
-      try {
-        const { username, password } = req.body;
-        const response = await AuthServiceInstance.login({
-          email: username,
-          password,
-        });
-        res.status(201).send(response);
-      } catch (error) {
-        next(error);
-      }
+  router.post("/login", passport.authenticate("local"), (req, res, next) => {
+    try {
+      res.end();
+    } catch (error) {
+      next(error);
     }
-  );
+  });
 };

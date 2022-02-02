@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 function Registration() {
@@ -16,11 +16,13 @@ function Registration() {
       .post("http://localhost:5000/auth/register", user)
       .then((response) => {
         console.log(response);
+        window.location = "/products";
       })
       .catch((error) => {
         setError(error.response.data);
       });
   };
+
   return (
     <>
       <h2>Sign Up!</h2>
