@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "16.13.0",
-    "npm": "7.18.1"
+    "node": "16",
+    "npm": "7"
   },
   "scripts": {
     "start": "node index.js",
@@ -19,6 +19,7 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dayjs": "^1.10.7",
