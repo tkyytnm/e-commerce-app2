@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function Registration() {
+  const [error, setError] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, password } = e.target;
@@ -10,14 +12,13 @@ function Registration() {
       email: email.value,
       password: password.value,
     };
-    console.log("user:", user);
     axios
       .post("http://localhost:5000/auth/register", user)
       .then((response) => {
         console.log(response);
       })
       .catch((error) => {
-        console.error(error);
+        setError(error.response.data);
       });
   };
   return (
@@ -50,8 +51,10 @@ function Registration() {
                 <input type="password" name="password" id="password" required />
               </td>
             </tr>
+
             <tr>
               <td colSpan="2" className="btn">
+                {!error.length ? "" : <div className="error">{error}</div>}
                 <input type="submit" value="Sign Up!" />
               </td>
             </tr>
