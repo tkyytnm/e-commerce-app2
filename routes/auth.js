@@ -36,4 +36,17 @@ module.exports = (app, passport) => {
       res.redirect("http://localhost:3000/products");
     }
   );
+
+  router.get(
+    "/facebook",
+    passport.authenticate("facebook", { scope: ["public_profile"] })
+  );
+
+  router.get(
+    "/facebook/callback",
+    passport.authenticate("facebook", { failureRedirect: "/login" }),
+    (req, res) => {
+      res.redirect("http://localhost:3000/products");
+    }
+  );
 };

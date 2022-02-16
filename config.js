@@ -12,5 +12,9 @@ module.exports = {
     CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL,
   },
-  FACEBOOK: {},
+  FACEBOOK: {
+    APP_ID: process.env.FACEBOOK_APP_ID,
+    APP_SECRET: process.env.FACEBOOK_APP_SECRET,
+    CALLBACK_URL: process.env.FACEBOOK_CALLBACK_URL,
+  },
 };

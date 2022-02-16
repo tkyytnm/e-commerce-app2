@@ -75,7 +75,21 @@ module.exports = class UserModel {
 
   async findByOneGoogleId(id) {
     try {
-      const statement = "select * from users where google ->> 'id' = $1";
+      const statement = "select id from users where google ->> 'id' = $1";
+      const value = [id];
+      const result = await db.query(statement, value);
+      if (result.rows?.length) {
+        return result.rows[0];
+      }
+      return null;
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+
+  async findByOneFacebookId(id) {
+    try {
+      const statement = `select id from users where facebook ->> 'id' = $1`;
       const value = [id];
       const result = await db.query(statement, value);
       if (result.rows?.length) {
