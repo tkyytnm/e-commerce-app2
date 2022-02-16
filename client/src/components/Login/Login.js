@@ -59,6 +59,10 @@ function Login() {
           </tbody>
         </table>
       </form>
+      <div className="third-party-login">
+        <a href="http://localhost:5000/auth/google">Sign in with Google</a>
+        <a href="http://localhost:5000/auth/facebook">Sign in with Facebook</a>
+      </div>
     </>
   );
 }

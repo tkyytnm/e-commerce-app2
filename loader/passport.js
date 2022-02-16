@@ -1,6 +1,8 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+const GoogleStrategy = require("passport-google-oidc");
 const AuthService = require("../services/authService");
+const { GOOGLE } = require("../config");
 const AuthServiceInstance = new AuthService();
 
 module.exports = (app) => {
@@ -28,6 +30,24 @@ module.exports = (app) => {
         return done(error);
       }
     })
+  );
+
+  passport.use(
+    new GoogleStrategy(
+      {
+        clientID: GOOGLE.CLIENT_ID,
+        clientSecret: GOOGLE.CLIENT_SECRET,
+        callbackURL: GOOGLE.CALLBACK_URL,
+      },
+      async (issuser, profile, done) => {
+        try {
+          const user = await AuthServiceInstance.googleLogin(profile);
+          return done(null, user);
+        } catch (err) {
+          return done(err);
+        }
+      }
+    )
   );
 
   return passport;

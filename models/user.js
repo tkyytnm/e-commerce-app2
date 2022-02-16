@@ -4,7 +4,8 @@ const pgp = require("pg-promise")({ capSQL: true });
 module.exports = class UserModel {
   async create(data) {
     try {
-      const statement = pgp.helpers.insert(data, null, "users") + ' returning *';
+      const statement =
+        pgp.helpers.insert(data, null, "users") + " returning *";
 
       const result = await db.query(statement);
 
@@ -21,7 +22,9 @@ module.exports = class UserModel {
   async update(data) {
     try {
       const { userId, ...params } = data;
-      const condition = pgp.as.format(" where id = ${userId} returning *", { userId });
+      const condition = pgp.as.format(" where id = ${userId} returning *", {
+        userId,
+      });
       const statement =
         pgp.helpers.update(params.data, null, "users") + condition;
 
@@ -67,6 +70,20 @@ module.exports = class UserModel {
       return null;
     } catch (error) {
       throw new Error(error);
+    }
+  }
+
+  async findByOneGoogleId(id) {
+    try {
+      const statement = "select * from users where google ->> 'id' = $1";
+      const value = [id];
+      const result = await db.query(statement, value);
+      if (result.rows?.length) {
+        return result.rows[0];
+      }
+      return null;
+    } catch (err) {
+      throw new Error(err);
     }
   }
 };

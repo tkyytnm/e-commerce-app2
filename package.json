@@ -29,6 +29,8 @@
     "http-errors": "^1.7.2",
     "morgan": "^1.10.0",
     "passport": "^0.5.2",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oidc": "^0.1.0",
     "passport-local": "^1.0.0",
     "pg": "^8.7.1",
     "pg-promise": "^10.11.1",

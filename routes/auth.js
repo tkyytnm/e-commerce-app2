@@ -23,4 +23,17 @@ module.exports = (app, passport) => {
       next(error);
     }
   });
+
+  router.get(
+    "/google",
+    passport.authenticate("google", { scope: ["profile"] })
+  );
+
+  router.get(
+    "/google/callback",
+    passport.authenticate("google", { failureRedirect: "/login" }),
+    (req, res) => {
+      res.redirect("http://localhost:3000/products");
+    }
+  );
 };
