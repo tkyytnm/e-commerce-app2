@@ -49,4 +49,9 @@ module.exports = (app, passport) => {
       res.redirect("http://localhost:3000/products");
     }
   );
+
+  router.post("/logout", (req, res) => {
+    req.logout();
+    res.redirect("http://localhost:3000/products");
+  });
 };

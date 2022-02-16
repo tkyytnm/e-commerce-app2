@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Logout from "./Logout/Logout";
 
 function Nav() {
   return (
@@ -6,7 +7,7 @@ function Nav() {
       <Link to="/products">Products</Link>
       <Link to="/cart">Cart</Link>
       <Link to="/order">Order History</Link>
-      <Link to="/logout">Logout</Link>
+      <Logout />
       <Link to="/register">Sign up</Link>
       <Link to="/login">Sign in</Link>
     </nav>

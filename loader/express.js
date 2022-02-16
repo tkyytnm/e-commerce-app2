@@ -8,6 +8,6 @@ module.exports = (app) => {
   app.use(morgan("tiny"));
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
-  app.use(session({ secret: "dogs", resave: false, saveUninitialized: false }));
+  app.use(session({ secret: "dsga134sdf4354hgre54gae", resave: false, saveUninitialized: false }));
   return app;
 };
