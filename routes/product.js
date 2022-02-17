@@ -4,7 +4,7 @@ const ProductService = require("../services/productService");
 const ProductServiceInstance = new ProductService();
 
 module.exports = (app) => {
-  app.use("/products", router);
+  app.use("/api/products", router);
 
   router.get("/", async (req, res, next) => {
     try {

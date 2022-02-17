@@ -4,7 +4,7 @@ const AuthService = require("../services/authService");
 const AuthServiceInstance = new AuthService();
 
 module.exports = (app, passport) => {
-  app.use("/auth", router);
+  app.use("/api/auth", router);
 
   router.post("/register", async (req, res, next) => {
     try {
@@ -18,7 +18,7 @@ module.exports = (app, passport) => {
 
   router.post("/login", passport.authenticate("local"), (req, res, next) => {
     try {
-      res.end();
+      res.status(200).send();
     } catch (error) {
       next(error);
     }
@@ -52,6 +52,6 @@ module.exports = (app, passport) => {
 
   router.post("/logout", (req, res) => {
     req.logout();
-    res.redirect("http://localhost:3000/products");
+    res.redirect("/");
   });
 };

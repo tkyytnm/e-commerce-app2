@@ -4,7 +4,7 @@ const CartService = require("../services/cartService");
 const CartServiceInstance = new CartService();
 
 module.exports = (app) => {
-  app.use("/cart", router);
+  app.use("/api/cart", router);
 
   router.get("/", async (req, res, next) => {
     try {
