@@ -3,7 +3,7 @@ import axios from "axios";
 const Logout = () => {
   const handleClick = (e) => {
     axios
-      .post("http://localhost:5000/auth/logout")
+      .post("/api/auth/logout")
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };

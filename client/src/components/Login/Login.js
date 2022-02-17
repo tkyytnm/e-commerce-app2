@@ -12,7 +12,7 @@ function Login() {
       password: password.value,
     };
     axios
-      .post("http://localhost:5000/auth/login", user)
+      .post("/api/auth/login", user)
       .then((response) => {
         console.log("response", response);
         window.location = "/products";
@@ -60,8 +60,8 @@ function Login() {
         </table>
       </form>
       <div className="third-party-login">
-        <a href="http://localhost:5000/auth/google">Sign in with Google</a>
-        <a href="http://localhost:5000/auth/facebook">Sign in with Facebook</a>
+        <a href="/api/auth/google">Sign in with Google</a>
+        <a href="/api/auth/facebook">Sign in with Facebook</a>
       </div>
     </>
   );

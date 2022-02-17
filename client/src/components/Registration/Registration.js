@@ -13,7 +13,7 @@ function Registration() {
       password: password.value,
     };
     axios
-      .post("http://localhost:5000/auth/register", user)
+      .post("/api/auth/register", user)
       .then((response) => {
         console.log(response);
         window.location = "/products";
