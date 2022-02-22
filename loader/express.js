@@ -6,7 +6,7 @@ const { SESSION_SECRET } = require("../config");
 
 module.exports = (app) => {
   app.use(cors());
-  app.use(morgan("tiny"));
+  app.use(morgan("dev"));
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   app.use(

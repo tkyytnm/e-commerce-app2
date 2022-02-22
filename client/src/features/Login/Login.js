@@ -1,8 +1,10 @@
-import { useState } from "react";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { submitLogin } from "../common/authSlice";
+import { isSubmittingSelect } from "../common/authSlice";
 
 function Login() {
-  const [error, setError] = useState("");
+  const dispatch = useDispatch();
+  const isSubmitting = useSelector(isSubmittingSelect);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,20 +13,7 @@ function Login() {
       username: email.value,
       password: password.value,
     };
-    axios
-      .post("/api/auth/login", user)
-      .then((response) => {
-        console.log("response", response);
-        window.location = "/products";
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response.data);
-          setError(error.response.data);
-        } else {
-          console.log("Error", error.message);
-        }
-      });
+    dispatch(submitLogin(user));
   };
 
   return (
@@ -52,7 +41,8 @@ function Login() {
 
             <tr>
               <td colSpan="2" className="btn">
-                {!error.length ? "" : <div className="error">{error}</div>}
+                {/* {!error.length ? "" : <div className="error">{error}</div>} */}
+                {isSubmitting ? "submitting" : ""}
                 <input type="submit" value="Sign In!" />
               </td>
             </tr>
