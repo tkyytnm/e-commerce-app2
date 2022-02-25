@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import Header from "./Header/Header";
 import Nav from "./Nav/Nav";
-import Registration from "./Registration/Registration";
-import Login from "./Login/Login";
+import Registration from "../routes/Registration/Registration";
+import Login from "../routes/Login/Login";
 import ProductList from "./ProductList/ProductList";
-import ProductDetail from "./ProductDetail/ProductDetail";
-import Cart from "./Cart/Cart";
-import OrderHistory from "./OrderHistory/OrderHistory";
+import ProductDetail from "../routes/ProductDetail/ProductDetail";
+import Cart from "../routes/Cart/Cart";
+import OrderHistory from "../routes/OrderHistory/OrderHistory";
 
 function App() {
   return (
