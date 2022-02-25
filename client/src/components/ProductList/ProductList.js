@@ -3,7 +3,7 @@ import {
   fetchProductList,
   isLoadingSelect,
   productListSelect,
-} from "./productListSlice";
+} from "../../store/productSlice";
 import { useEffect } from "react";
 import Product from "./Product";
 

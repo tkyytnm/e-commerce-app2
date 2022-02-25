@@ -4,9 +4,9 @@ import {
   isLoadingSelect,
   productDetailSelect,
   fetchProductDetail,
-} from "./productDetailSlice";
+} from "../../store/productSlice";
 import { useEffect } from "react";
-import AddCart from "./AddCart/AddCart";
+import AddCartButton from "./AddCartButton/AddCartButton";
 
 function ProductDetail() {
   const params = useParams();
@@ -24,7 +24,7 @@ function ProductDetail() {
       <h2>{productDetail.name}</h2>
       <div>￥{productDetail.price}</div>
       <p>{productDetail.description}</p>
-      <AddCart />
+      <AddCartButton />
     </div>
   );
 }

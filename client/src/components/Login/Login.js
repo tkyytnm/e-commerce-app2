@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { submitLogin } from "../common/authSlice";
-import { isSubmittingSelect } from "../common/authSlice";
+import { submitLogin, isSubmittingSelect } from "../../store/authSlice";
 
 function Login() {
   const dispatch = useDispatch();

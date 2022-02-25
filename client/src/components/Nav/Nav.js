@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Logout from "./Logout/Logout";
-import { isLoggedInSelect, userNameSelect } from "../common/authSlice";
+import { isLoggedInSelect, userNameSelect } from "../../store/authSlice";
 import { useSelector } from "react-redux";
 
 function Nav() {

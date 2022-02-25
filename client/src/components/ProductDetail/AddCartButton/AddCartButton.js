@@ -1,4 +1,4 @@
-const AddCart = () => {
+const addCartButton = () => {
   return (
     <>
       <button>Add Cart</button>
@@ -6,4 +6,4 @@ const AddCart = () => {
   );
 };
 
-export default AddCart;
+export default addCartButton;
