@@ -4,8 +4,8 @@ import axios from "axios";
 export const submitLogin = createAsyncThunk(
   "auth/submitLogin",
   async (user) => {
-    await axios.post("/api/auth/login", user);
-    return user.username;
+    const response = await axios.post("/api/auth/login", user);
+    return response.data.name;
   }
 );
 
@@ -36,6 +36,7 @@ const authSlice = createSlice({
     });
 
     builder.addCase(submitLogout.fulfilled, (state, action) => {
+      state.userName = "";
       state.isLoggedIn = false;
     });
   },

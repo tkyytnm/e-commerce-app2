@@ -18,7 +18,7 @@ module.exports = (app, passport) => {
 
   router.post("/login", passport.authenticate("local"), (req, res, next) => {
     try {
-      res.status(200).send();
+      res.status(200).send(req.user);
     } catch (error) {
       next(error);
     }

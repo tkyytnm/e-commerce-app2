@@ -9,7 +9,7 @@ servers:
   - url: https://e-commerce-app2-on-codecademy.herokuapp.com/
     description: heroku server
 paths:
-  /products:
+  /api/products:
     get:
       summary: Returns a list of products.
       description: Returns a list of products.
@@ -35,7 +35,7 @@ paths:
                     description:
                       type: string
                       example: Nice Black Cap
-  /products/{productId}:
+  /api/products/{productId}:
     get:
       summary: Returns a product by ID.
       description: Returns a product data by ID.
@@ -66,7 +66,7 @@ paths:
                   description:
                     type: string
                     example: Nice Black Cap
-  /users/{userId}:
+  /api/users/{userId}:
     get:
       summary: Return a user data by userId.
       description: Return a user data by userId.
@@ -101,7 +101,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/User"
-  /auth/register:
+  /api/auth/register:
     post:
       summary: register a user.
       requestBody:
@@ -127,7 +127,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/User"
-  /auth/login:
+  /api/auth/login:
     post:
       summary: authenticate a user.
       requestBody:
@@ -150,7 +150,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/User"
-  /cart:
+  /api/cart:
     get:
       summary: Returns a list of cartItems.
       responses:
@@ -218,7 +218,7 @@ paths:
                     type: string
                   modified:
                     type: string
-  /cart/items:
+  /api/cart/items:
     post:
       summary: add cart items.
       requestBody:
@@ -251,7 +251,7 @@ paths:
                   id:
                     type: integer
 
-  /cart/items/{cartItemId}:
+  /api/cart/items/{cartItemId}:
     put:
       summary: update cart item by id.
       parameters:
@@ -311,7 +311,7 @@ paths:
                     type: integer
                   id:
                     type: integer
-  /cart/{cartId}/checkout:
+  /api/cart/{cartId}/checkout:
     post:
       summary: checkout cart.
       parameters:
@@ -341,7 +341,7 @@ paths:
                     type: integer
                   status:
                     type: string
-  /orders:
+  /api/orders:
     get:
       summary: get orders.
       responses:
@@ -366,7 +366,7 @@ paths:
                       type: integer
                     status:
                       type: string
-  /orders/{orderId}:
+  /api/orders/{orderId}:
     get:
       summary: get an order.
       parameters:
