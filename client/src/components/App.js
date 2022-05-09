@@ -3,7 +3,7 @@ import Header from "./Header/Header";
 import Nav from "./Nav/Nav";
 import Registration from "../routes/Registration/Registration";
 import Login from "../routes/Login/Login";
-import ProductList from "./ProductList/ProductList";
+import ProductList from "../routes/ProductList/ProductList";
 import ProductDetail from "../routes/ProductDetail/ProductDetail";
 import Cart from "../routes/Cart/Cart";
 import OrderHistory from "../routes/OrderHistory/OrderHistory";

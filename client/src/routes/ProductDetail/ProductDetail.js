@@ -6,7 +6,7 @@ import {
   fetchProductDetail,
 } from "../../store/productSlice";
 import { useEffect } from "react";
-import AddCartButton from "./AddCartButton/AddCartButton";
+import AddCartButton from "./AddToCartButton/AddToCartButton";
 
 function ProductDetail() {
   const params = useParams();
